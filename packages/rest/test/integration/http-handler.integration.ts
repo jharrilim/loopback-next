@@ -242,19 +242,11 @@ describe('HttpHandler', () => {
         .expect(200, {key: 'value'});
     });
 
-    it('rejects url-encoded request body', () => {
-      logErrorsExcept(415);
+    it('allows url-encoded request body', () => {
       return client
         .post('/show-body')
         .send('key=value')
-        .expect(415, {
-          error: {
-            message:
-              'Content-type application/x-www-form-urlencoded is not supported.',
-            name: 'UnsupportedMediaTypeError',
-            statusCode: 415,
-          },
-        });
+        .expect(200, {key: 'value'});
     });
 
     it('returns 400 for malformed JSON body', () => {
@@ -271,6 +263,56 @@ describe('HttpHandler', () => {
           },
         });
     });
+
+    it('rejects unsupported request body', () => {
+      logErrorsExcept(415);
+      return client
+        .post('/show-body')
+        .set('content-type', 'application/xml')
+        .send('<key>value</key>')
+        .expect(415, {
+          error: {
+            message: 'Content-type application/xml is not supported.',
+            name: 'UnsupportedMediaTypeError',
+            statusCode: 415,
+          },
+        });
+    });
+
+    it('rejects over-limit request form body', () => {
+      logErrorsExcept(413);
+      return client
+        .post('/show-body')
+        .set('content-type', 'application/x-www-form-urlencoded')
+        .send('key=' + givenLargeRequest())
+        .expect(413, {
+          error: {
+            message: 'request entity too large',
+            name: 'Error',
+            statusCode: 413,
+          },
+        });
+    });
+
+    it('rejects over-limit request json body', () => {
+      logErrorsExcept(413);
+      return client
+        .post('/show-body')
+        .set('content-type', 'application/json')
+        .send({key: givenLargeRequest()})
+        .expect(413, {
+          error: {
+            message: 'request entity too large',
+            name: 'Error',
+            statusCode: 413,
+          },
+        });
+    });
+
+    function givenLargeRequest() {
+      const data = Buffer.alloc(2 * 1024 * 1024, 'A', 'utf-8');
+      return data.toString();
+    }
 
     function givenBodyParamController() {
       const spec = anOpenApiSpec()
