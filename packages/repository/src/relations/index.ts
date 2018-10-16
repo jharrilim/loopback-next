@@ -4,3 +4,7 @@
 // License text available at https://opensource.org/licenses/MIT
 
 export * from './relation.types';
+export * from './relation.decorator';
+export * from './belongs-to';
+export * from './has-many';
+export * from './has-one';
