@@ -4,3 +4,4 @@
 // License text available at https://opensource.org/licenses/MIT
 
 export * from './has-many.decorator';
+export * from './has-many.repository';

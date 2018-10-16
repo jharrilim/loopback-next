@@ -14,7 +14,7 @@ import {
   DefaultHasManyRepository,
   Getter,
   HasManyRepository,
-} from './relation.repository';
+} from '../relations';
 import {EntityCrudRepository} from './repository';
 
 const debug = debugFactory('loopback:repository:relation-factory');

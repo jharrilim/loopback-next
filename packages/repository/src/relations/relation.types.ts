@@ -79,3 +79,6 @@ export type RelationMetadata =
   // TODO(bajtos) add other relation types and remove RelationDefinitionBase once
   // all relation types are covered.
   | RelationDefinitionBase;
+
+// Re-export Getter so that users don't have to import from @loopback/context
+export {Getter} from '@loopback/context';

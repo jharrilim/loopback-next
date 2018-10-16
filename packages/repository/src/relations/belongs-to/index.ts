@@ -4,3 +4,4 @@
 // License text available at https://opensource.org/licenses/MIT
 
 export * from './belongs-to.decorator';
+export * from './belongs-to.repository';
