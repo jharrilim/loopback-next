@@ -15,13 +15,11 @@ import {
   Options,
   PositionalParameters,
 } from '../common-types';
-import {
-  BelongsToDefinition,
-  HasManyDefinition,
-} from '../decorators/relation.decorator';
 import {EntityNotFoundError} from '../errors';
 import {Entity, ModelDefinition} from '../model';
 import {Filter, Where} from '../query';
+import {BelongsToDefinition, HasManyDefinition} from '../relations';
+import {resolveType} from '../type-resolver';
 import {
   BelongsToAccessor,
   createBelongsToAccessor,
@@ -29,7 +27,6 @@ import {
   HasManyRepositoryFactory,
 } from './relation.factory';
 import {EntityCrudRepository} from './repository';
-import {resolveType} from '../type-resolver';
 
 export namespace juggler {
   export import DataSource = legacy.DataSource;

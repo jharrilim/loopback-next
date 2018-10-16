@@ -6,12 +6,9 @@
 import * as debugFactory from 'debug';
 import {camelCase} from 'lodash';
 import {DataObject, isTypeResolver} from '..';
-import {
-  BelongsToDefinition,
-  HasManyDefinition,
-} from '../decorators/relation.decorator';
 import {InvalidRelationError} from '../errors';
 import {Entity} from '../model';
+import {BelongsToDefinition, HasManyDefinition} from '../relations';
 import {
   DefaultBelongsToRepository,
   DefaultHasManyRepository,

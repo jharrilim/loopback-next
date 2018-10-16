@@ -11,81 +11,14 @@ import {
   PropertyDefinition,
   RelationDefinitionMap,
 } from '../model';
-import {TypeResolver} from '../type-resolver';
+import {
+  BelongsToDefinition,
+  HasManyDefinition,
+  RelationType,
+} from '../relations';
 import {property} from './model.decorator';
 
-export enum RelationType {
-  belongsTo = 'belongsTo',
-  hasOne = 'hasOne',
-  hasMany = 'hasMany',
-  embedsOne = 'embedsOne',
-  embedsMany = 'embedsMany',
-  referencesOne = 'referencesOne',
-  referencesMany = 'referencesMany',
-}
-
 export const RELATIONS_KEY = 'loopback:relations';
-
-export interface RelationDefinitionBase {
-  /**
-   * The type of the relation, must be one of RelationType values.
-   */
-  type: RelationType;
-
-  /**
-   * The relation name, typically matching the name of the accessor property
-   * defined on the source model. For example "orders" or "customer".
-   */
-  name: string;
-
-  /**
-   * The source model of this relation.
-   *
-   * E.g. when a Customer has many Order instances, then Customer is the source.
-   */
-  source: typeof Entity;
-
-  /**
-   * The target model of this relation.
-   *
-   * E.g. when a Customer has many Order instances, then Order is the target.
-   */
-  target: TypeResolver<Entity, typeof Entity>;
-}
-
-export interface HasManyDefinition extends RelationDefinitionBase {
-  type: RelationType.hasMany;
-
-  /**
-   * The foreign key used by the target model.
-   *
-   * E.g. when a Customer has many Order instances, then keyTo is "customerId".
-   * Note that "customerId" is the default FK assumed by the framework, users
-   * can provide a custom FK name by setting "keyTo".
-   */
-  keyTo?: string;
-}
-
-export interface BelongsToDefinition extends RelationDefinitionBase {
-  type: RelationType.belongsTo;
-
-  /*
-   * The foreign key in the source model, e.g. Order#customerId.
-   */
-  keyFrom: string;
-
-  /*
-   * The primary key of the target model, e.g Customer#id.
-   */
-  keyTo?: string;
-}
-
-export type RelationMetadata =
-  | HasManyDefinition
-  | BelongsToDefinition
-  // TODO(bajtos) add other relation types and remove RelationDefinitionBase once
-  // all relation types are covered.
-  | RelationDefinitionBase;
 
 /**
  * Decorator for relations
