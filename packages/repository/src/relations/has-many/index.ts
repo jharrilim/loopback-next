@@ -5,3 +5,4 @@
 
 export * from './has-many.decorator';
 export * from './has-many.repository';
+export * from './has-many-repository.factory';

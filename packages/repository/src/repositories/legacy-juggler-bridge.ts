@@ -18,14 +18,15 @@ import {
 import {EntityNotFoundError} from '../errors';
 import {Entity, ModelDefinition} from '../model';
 import {Filter, Where} from '../query';
-import {BelongsToDefinition, HasManyDefinition} from '../relations';
-import {resolveType} from '../type-resolver';
 import {
+  BelongsToDefinition,
+  HasManyDefinition,
+  HasManyRepositoryFactory,
+  createHasManyRepositoryFactory,
   BelongsToAccessor,
   createBelongsToAccessor,
-  createHasManyRepositoryFactory,
-  HasManyRepositoryFactory,
-} from './relation.factory';
+} from '../relations';
+import {resolveType} from '../type-resolver';
 import {EntityCrudRepository} from './repository';
 
 export namespace juggler {
