@@ -8,9 +8,9 @@ permalink: /doc/en/lb4/index.html
 summary: LoopBack is a platform for building APIs and microservices in Node.js
 ---
 
-{% include important.html content="LoopBack 4 GA has been released in
+{% include important.html content="LoopBack 4 GA (General Availability) has been released in
 October 2018, read more in the
-[announcement post](http://strongloop.com/strongblog/loopback-4-ga")
+[announcement post](http://strongloop.com/strongblog/loopback-4-ga)
 " %}
 
 {% include see-also.html title="GitHub Repo" content=' LoopBack 4 framework code
